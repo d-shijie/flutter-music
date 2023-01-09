@@ -12,8 +12,9 @@ class Find extends StatefulWidget {
 class _FindState extends State<Find> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(title: Text('Find')),
+      body: const Center(
         child: Text(
           'Find',
           style: TextStyle(fontSize: 20, color: Colors.red),
