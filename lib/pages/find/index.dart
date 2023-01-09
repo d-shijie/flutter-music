@@ -15,7 +15,10 @@ class Find extends StatefulWidget {
 
 class _FindState extends State<Find> {
   var keywords = TextEditingController();
-  List<Widget> layoutItems = [Banner()];
+  List<Widget> layoutItems = [
+    Banner(),
+    const ITapBar(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +66,7 @@ class _FindState extends State<Find> {
               ),
           itemCount: layoutItems.length),
       drawer: const Drawer(
+        // width: 200,
         child: APPDrawer(),
       ),
     );
@@ -108,7 +112,7 @@ class _BannerState extends State<Banner> {
                   child: Image.network(
                     banners[index]['pic'] ?? '',
                     fit: BoxFit.fill,
-                    height: 175,
+                    height: 180,
                   ),
                 )),
           );
@@ -118,5 +122,94 @@ class _BannerState extends State<Banner> {
             autoPlay: true,
             aspectRatio: 2.0,
             enlargeCenterPage: true));
+  }
+}
+
+class ITapBar extends StatefulWidget {
+  const ITapBar({Key? key}) : super(key: key);
+
+  @override
+  State<ITapBar> createState() => _ITapBarState();
+}
+
+class _ITapBarState extends State<ITapBar> with TickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 11,
+      child: TabBar(
+        indicator: const BoxDecoration(), //去除下划线
+        isScrollable: true,
+        unselectedLabelColor: const Color.fromARGB(255, 140, 139, 139),
+        unselectedLabelStyle: const TextStyle(fontSize: 12),
+        labelStyle: const TextStyle(fontSize: 12),
+        labelColor: const Color.fromARGB(255, 140, 139, 139),
+
+        tabs: const [
+          Tab(
+              text: '每日推荐',
+              icon: Icon(Icons.music_note),
+              iconMargin: EdgeInsets.only(bottom: 0)),
+          Tab(
+            text: '私人FM',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+          Tab(
+            text: '歌单',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+          Tab(
+            text: '排行榜',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+          Tab(
+            text: '有声书',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+          Tab(
+            text: '数字专辑',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+          Tab(
+            text: '直播',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+          Tab(
+            text: '专注新歌',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+          Tab(
+            text: '一歌一遇',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+          Tab(
+            text: '收藏家',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+          Tab(
+            text: '游戏专区',
+            icon: Icon(Icons.music_note),
+            iconMargin: EdgeInsets.only(bottom: 0),
+          ),
+        ],
+        onTap: (index) {
+          print(index);
+        },
+      ),
+    );
   }
 }
