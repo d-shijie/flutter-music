@@ -10,7 +10,7 @@ final routes = {
   '/': (context) => Index(
         pages: const [Find(), Profile(), Find(), Find()],
         items: const [
-          {"label": '发现', "icon": Icon(Icons.new_label)},
+          {"label": '发现', "icon": Icon(Icons.policy_rounded)},
           {"label": '播客', "icon": Icon(Icons.mobile_friendly)},
           {"label": '我的', "icon": Icon(Icons.person)},
           {"label": '关注', "icon": Icon(Icons.follow_the_signs)}

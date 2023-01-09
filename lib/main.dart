@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import './utils/setting.dart';
 import './pages/error/ErrorPage.dart';
@@ -10,6 +11,8 @@ import './route/routes.dart';
 
 void main() {
   runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
   configLoading();
 }
 
