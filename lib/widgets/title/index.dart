@@ -38,6 +38,7 @@ class _DTitleState extends State<DTitle> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              //Visibility(保存状态)与Offstage(重新加载)都可以控制显示与隐藏
               Offstage(
                 offstage: notShowPre,
                 child: Icon(

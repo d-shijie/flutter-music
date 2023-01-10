@@ -5,9 +5,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../api/index.dart';
 import '../../widgets/drawer/index.dart';
 import '../../widgets/title/index.dart';
+import '../../widgets/bottomSheet/index.dart';
 
 class Find extends StatefulWidget {
   const Find({Key? key}) : super(key: key);
@@ -211,17 +213,30 @@ class RecommandPlayList extends StatefulWidget {
 }
 
 class _RecommandPlayListState extends State<RecommandPlayList> {
+  var items = [
+    {'text': '优先推荐', 'icon': const Icon(Icons.add_link_rounded)},
+    {'text': '减少推荐', 'icon': const Icon(Icons.delete)},
+    {'text': '更对内容', 'icon': const Icon(Icons.more_horiz)}
+  ];
   @override
   Widget build(BuildContext context) {
     return DTitle(
-      text: '推荐歌单',
-      prefix: Icons.refresh,
-      iconSize: 18,
-      fontSize: 12,
-      suffix: Icons.chevron_right,
-      onTap: () {
-        print('test');
-      },
-    );
+        text: '推荐歌单',
+        prefix: Icons.refresh,
+        iconSize: 18,
+        fontSize: 12,
+        suffix: Icons.chevron_right,
+        onTap: () => showMaterialModalBottomSheet(
+              expand: false,
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (context) => ModalFit(
+                items: items,
+                onTap: (e) {
+                  print(e);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ));
   }
 }
