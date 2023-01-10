@@ -31,7 +31,7 @@ class _DTitleState extends State<DTitle> {
     bool notShowPre = widget.prefix != null ? false : true;
     bool notShowSuf = widget.suffix != null ? false : true;
     return Container(
-      margin: const EdgeInsets.only(left: 15),
+      margin: const EdgeInsets.only(left: 15, bottom: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

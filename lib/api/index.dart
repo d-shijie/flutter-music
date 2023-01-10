@@ -6,4 +6,8 @@ class Api {
   Future getBanners() async {
     return await http.get('/banner?type=1');
   }
+
+  Future getPersonalized() async {
+    return await http.get('/personalized');
+  }
 }

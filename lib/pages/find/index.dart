@@ -10,6 +10,7 @@ import '../../api/index.dart';
 import '../../widgets/drawer/index.dart';
 import '../../widgets/title/index.dart';
 import '../../widgets/bottomSheet/index.dart';
+import '../../widgets/playlistCover/index.dart';
 
 class Find extends StatefulWidget {
   const Find({Key? key}) : super(key: key);
@@ -213,30 +214,77 @@ class RecommandPlayList extends StatefulWidget {
 }
 
 class _RecommandPlayListState extends State<RecommandPlayList> {
+  var api = Api();
   var items = [
     {'text': '优先推荐', 'icon': const Icon(Icons.add_link_rounded)},
     {'text': '减少推荐', 'icon': const Icon(Icons.delete)},
     {'text': '更对内容', 'icon': const Icon(Icons.more_horiz)}
   ];
+  var reommandPlaylist = [];
+  _getReommandPlaylist() {
+    api.getPersonalized().then(
+      (value) {
+        print(value);
+        setState(() {
+          reommandPlaylist = value['result'];
+        });
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    _getReommandPlaylist();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DTitle(
-        text: '推荐歌单',
-        prefix: Icons.refresh,
-        iconSize: 18,
-        fontSize: 12,
-        suffix: Icons.chevron_right,
-        onTap: () => showMaterialModalBottomSheet(
-              expand: false,
-              context: context,
-              backgroundColor: Colors.transparent,
-              builder: (context) => ModalFit(
-                items: items,
-                onTap: (e) {
-                  print(e);
-                  Navigator.of(context).pop();
-                },
-              ),
-            ));
+    return Column(
+      children: [
+        DTitle(
+            text: '推荐歌单',
+            prefix: Icons.refresh,
+            iconSize: 18,
+            fontSize: 12,
+            suffix: Icons.chevron_right,
+            onTap: () => showMaterialModalBottomSheet(
+                  expand: false,
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => ModalFit(
+                    items: items,
+                    onTap: (e) {
+                      print(e);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                )),
+        DefaultTabController(
+          length: reommandPlaylist.length,
+          child: TabBar(
+            indicator: const BoxDecoration(), //去除下划线
+            isScrollable: true,
+
+            unselectedLabelColor: const Color.fromARGB(255, 140, 139, 139),
+            unselectedLabelStyle: const TextStyle(fontSize: 12),
+            labelStyle: const TextStyle(fontSize: 12),
+            labelColor: const Color.fromARGB(255, 140, 139, 139),
+            tabs: reommandPlaylist
+                .map(
+                  (e) => PlaylistCover(
+                    cover: e['picUrl'],
+                    desc: e['name'],
+                    playCount: e['playCount'],
+                  ),
+                )
+                .toList(),
+            onTap: (index) {
+              print(index);
+            },
+          ),
+        )
+      ],
+    );
   }
 }
