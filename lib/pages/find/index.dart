@@ -1,10 +1,13 @@
 // ignore_for_file: file_names, must_be_immutable, avoid_print
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../api/index.dart';
 import '../../widgets/drawer/index.dart';
+import '../../widgets/title/index.dart';
 
 class Find extends StatefulWidget {
   const Find({Key? key}) : super(key: key);
@@ -18,7 +21,30 @@ class _FindState extends State<Find> {
   List<Widget> layoutItems = [
     Banner(),
     const ITapBar(),
+    const RecommandPlayList()
   ];
+  final List<String> hintTexts = [
+    '周杰伦(Jay)',
+    '林俊杰(JJ)',
+    '五月天',
+    '薛之谦',
+    '不分手的恋爱'
+  ];
+  int count = 0;
+  String hintText = '';
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (count == hintTexts.length) {
+        count = 0;
+      }
+      setState(() {
+        hintText = hintTexts[count];
+      });
+      count++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +75,7 @@ class _FindState extends State<Find> {
                     borderRadius: BorderRadius.circular(15),
                     borderSide:
                         const BorderSide(width: 0, color: Colors.transparent)),
-                hintText: '周杰伦(Jay)',
+                hintText: hintText,
                 prefixIcon: const Icon(Icons.search),
                 hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
               ),
@@ -133,6 +159,19 @@ class ITapBar extends StatefulWidget {
 }
 
 class _ITapBarState extends State<ITapBar> with TickerProviderStateMixin {
+  final List<Map> tabbar = [
+    {'label': '每日推荐', 'icon': const Icon(Icons.music_note)},
+    {'label': '私人FM', 'icon': const Icon(Icons.music_note)},
+    {'label': '歌单', 'icon': const Icon(Icons.music_note)},
+    {'label': '排行榜', 'icon': const Icon(Icons.music_note)},
+    {'label': '有声书', 'icon': const Icon(Icons.music_note)},
+    {'label': '数字专辑', 'icon': const Icon(Icons.music_note)},
+    {'label': '直播', 'icon': const Icon(Icons.music_note)},
+    {'label': '专注新歌', 'icon': const Icon(Icons.music_note)},
+    {'label': '一歌一遇', 'icon': const Icon(Icons.music_note)},
+    {'label': '收藏家', 'icon': const Icon(Icons.music_note)},
+    {'label': '游戏专区', 'icon': const Icon(Icons.music_note)},
+  ];
   @override
   void initState() {
     super.initState();
@@ -141,7 +180,7 @@ class _ITapBarState extends State<ITapBar> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 11,
+      length: tabbar.length,
       child: TabBar(
         indicator: const BoxDecoration(), //去除下划线
         isScrollable: true,
@@ -149,67 +188,40 @@ class _ITapBarState extends State<ITapBar> with TickerProviderStateMixin {
         unselectedLabelStyle: const TextStyle(fontSize: 12),
         labelStyle: const TextStyle(fontSize: 12),
         labelColor: const Color.fromARGB(255, 140, 139, 139),
-
-        tabs: const [
-          Tab(
-              text: '每日推荐',
-              icon: Icon(Icons.music_note),
-              iconMargin: EdgeInsets.only(bottom: 0)),
-          Tab(
-            text: '私人FM',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-          Tab(
-            text: '歌单',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-          Tab(
-            text: '排行榜',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-          Tab(
-            text: '有声书',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-          Tab(
-            text: '数字专辑',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-          Tab(
-            text: '直播',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-          Tab(
-            text: '专注新歌',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-          Tab(
-            text: '一歌一遇',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-          Tab(
-            text: '收藏家',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-          Tab(
-            text: '游戏专区',
-            icon: Icon(Icons.music_note),
-            iconMargin: EdgeInsets.only(bottom: 0),
-          ),
-        ],
+        tabs: tabbar
+            .map((e) => Tab(
+                  text: e['label'],
+                  icon: e['icon'],
+                  iconMargin: const EdgeInsets.only(bottom: 0),
+                ))
+            .toList(),
         onTap: (index) {
           print(index);
         },
       ),
+    );
+  }
+}
+
+class RecommandPlayList extends StatefulWidget {
+  const RecommandPlayList({Key? key}) : super(key: key);
+
+  @override
+  State<RecommandPlayList> createState() => _RecommandPlayListState();
+}
+
+class _RecommandPlayListState extends State<RecommandPlayList> {
+  @override
+  Widget build(BuildContext context) {
+    return DTitle(
+      text: '推荐歌单',
+      prefix: Icons.refresh,
+      iconSize: 18,
+      fontSize: 12,
+      suffix: Icons.chevron_right,
+      onTap: () {
+        print('test');
+      },
     );
   }
 }
