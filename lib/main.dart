@@ -21,7 +21,7 @@ void configLoading() {
   EasyLoading.instance
     ..displayDuration = const Duration(milliseconds: 2)
     ..indicatorType = EasyLoadingIndicatorType.wave
-    ..loadingStyle = EasyLoadingStyle.custom //light dart custom
+    ..loadingStyle = EasyLoadingStyle.dark //light dart custom
     ..indicatorSize = 45.0
     ..radius = 10.0
     ..progressColor = Colors.yellow // 仅对custom类型有效

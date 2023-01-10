@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:music/pages/playlist/index.dart';
 import '../pages/index/Index.dart';
 import '../pages/find/index.dart';
 import '../pages/profile/index.dart';
@@ -25,4 +26,5 @@ final routes = {
         unselectedLabelStyle: const TextStyle(color: Colors.black),
       ),
   '/find': (context) => const Find(),
+  '/playlist': (context) => const PlayList()
 };

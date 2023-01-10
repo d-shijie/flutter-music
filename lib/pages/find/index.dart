@@ -265,7 +265,6 @@ class _RecommandPlayListState extends State<RecommandPlayList> {
           child: TabBar(
             indicator: const BoxDecoration(), //去除下划线
             isScrollable: true,
-
             unselectedLabelColor: const Color.fromARGB(255, 140, 139, 139),
             unselectedLabelStyle: const TextStyle(fontSize: 12),
             labelStyle: const TextStyle(fontSize: 12),
@@ -276,6 +275,12 @@ class _RecommandPlayListState extends State<RecommandPlayList> {
                     cover: e['picUrl'],
                     desc: e['name'],
                     playCount: e['playCount'],
+                    notShowIcon: true,
+                    object: e,
+                    onTap: (e) {
+                      Navigator.pushNamed(context, '/playlist',
+                          arguments: {'id': e['id']});
+                    },
                   ),
                 )
                 .toList(),
