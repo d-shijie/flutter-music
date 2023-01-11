@@ -149,7 +149,30 @@ class _PlayListState extends State<PlayList> {
             ),
           ),
           Container(
-              margin: const EdgeInsets.only(top: 150),
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            margin: const EdgeInsets.only(top: 150),
+            child: Row(children: [
+              const Icon(
+                Icons.play_arrow_sharp,
+                size: 24,
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  '播放全部(${playlistMusics.length})',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.download, size: 18)),
+              InkWell(
+                child: const Icon(Icons.menu, size: 18),
+                onTap: () {},
+              )
+            ]),
+          ),
+          Container(
+              margin: const EdgeInsets.only(top: 185),
               child: ListView(
                 children: playlistMusics.asMap().entries.map((e) {
                   var value = e.value;

@@ -11,6 +11,7 @@ class PlaylistItem extends StatefulWidget {
   int musicId;
   Function? playMV;
   Function? playMusic;
+  Function? more;
   PlaylistItem(
       {Key? key,
       required this.name,
@@ -20,7 +21,8 @@ class PlaylistItem extends StatefulWidget {
       this.album,
       this.mvId,
       this.playMV,
-      this.playMusic})
+      this.playMusic,
+      this.more})
       : super(key: key);
 
   @override
@@ -113,9 +115,14 @@ class _PlaylistItemState extends State<PlaylistItem> {
               },
             ),
           ),
-          const Icon(
-            Icons.more_vert_outlined,
-            size: 18,
+          InkWell(
+            child: const Icon(
+              Icons.more_vert_outlined,
+              size: 18,
+            ),
+            onTap: () {
+              widget.more!(widget.musicId);
+            },
           )
         ],
       ),
