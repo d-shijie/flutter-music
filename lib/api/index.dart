@@ -19,4 +19,11 @@ class Api {
       '/playlist/detail?id=$id',
     );
   }
+
+  // 获取歌单所有歌曲
+  Future getPlaylistMusics(id) async {
+    return await http.get(
+      '/playlist/track/all?id=$id',
+    );
+  }
 }

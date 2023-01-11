@@ -224,7 +224,6 @@ class _RecommandPlayListState extends State<RecommandPlayList> {
   _getReommandPlaylist() {
     api.getPersonalized().then(
       (value) {
-        print(value);
         setState(() {
           reommandPlaylist = value['result'];
         });
