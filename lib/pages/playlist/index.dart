@@ -5,11 +5,25 @@ import 'package:music/api/index.dart';
 import 'package:music/widgets/playlistCover/index.dart';
 import 'package:music/utils/format.dart';
 import 'package:music/widgets/playlistItem/index.dart';
+import 'package:just_audio/just_audio.dart';
+
+final player = AudioPlayer(); // Create a player
+final duration = player.setUrl(// Load a URL
+    'https://foo.com/bar.mp3'); // Schemes: (https: | file: | asset: )
+// Play without waiting for completion
+// await player.play();                            // Play while waiting for completion
+// await player.pause();                           // Pause but remain ready to play
+// await player.seek(Duration(second: 10));        // Jump to the 10 second position
+// await player.setSpeed(2.0);                     // Twice as fast
+// await player.setVolume(0.5);                    // Half as loud
+// await player.stop();                            // Stop and free resources
 
 var api = Api();
 var format = Format();
+
 var params;
 var playlist;
+
 List<dynamic> playlistMusics = [];
 
 class PlayList extends StatefulWidget {
@@ -56,6 +70,7 @@ class _PlayListState extends State<PlayList> {
 
   @override
   Widget build(BuildContext context) {
+    player.play();
     return Scaffold(
       appBar: AppBar(
           flexibleSpace: Container(
@@ -181,6 +196,10 @@ class _PlayListState extends State<PlayList> {
                     name: value['name'],
                     musicId: value['id'],
                     index: index,
+                    playMusic: () {
+                      // player.play();
+                      print('test');
+                    },
                     singer: value['ar'],
                     album: value['al'],
                     mvId: value['mv'] == 0 ? null : value['mv'],
